@@ -7,6 +7,7 @@ import os
 SWITCH_JWT_SECRET = os.getenv("SWITCH_JWT_SECRET", "my_secret_key")
 SWITCH_BASE_URL = os.getenv("SWITCH_BASE_URL")
 
+
 def _encode_payload(data):
     """encodes the data dict into a base64 string
     Args:
@@ -25,7 +26,9 @@ def _generate_token(author):
     Returns:
         (string) the generated token
     """
-    return jwt.encode({'Author': author}, SWITCH_JWT_SECRET, algorithm='HS256').decode('utf-8')
+    return jwt.encode({
+        'Author': author
+    }, SWITCH_JWT_SECRET, algorithm='HS256').decode('utf-8')
 
 
 def publish(topic, author, options):
@@ -50,6 +53,8 @@ def publish(topic, author, options):
     headers = {"Authorization": f"bearer {generated_token}"}
     payload = {"Payload": encoded_data, "Topic": topic}
 
-    response = requests.post(url=url, data=json.dumps(payload), headers=headers)
+    response = requests.post(url=url,
+                             data=json.dumps(payload),
+                             headers=headers)
     response.raise_for_status()
     return True

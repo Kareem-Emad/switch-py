@@ -1,5 +1,3 @@
 from . import publisher
 
-__all__ = [
-    'publisher'
-]
+__all__ = ['publisher']

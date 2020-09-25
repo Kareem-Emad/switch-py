@@ -32,18 +32,31 @@ class TestUtils(unittest.TestCase):
         """
         should be able to publish message with all params passed
         """
-        expected_payload = {'Payload': 'eyJib2R5IjogeyJoZWxsbyI6ICJ3b3JsZCJ9fQ==', 'Topic': 'test'}
+        expected_payload = {
+            'Payload': 'eyJib2R5IjogeyJoZWxsbyI6ICJ3b3JsZCJ9fQ==',
+            'Topic': 'test'
+        }
         publisher.SWITCH_BASE_URL = 'http://test.com'
         responses.add(responses.POST,
-                f'{publisher.SWITCH_BASE_URL}/publish',
-                json={'sucess': 'thank you'},
-                status=200)
+                      f'{publisher.SWITCH_BASE_URL}/publish',
+                      json={'sucess': 'thank you'},
+                      status=200)
 
-        publish(topic='test', author='test_author', options={'body': {'hello': 'world'}})
+        publish(topic='test',
+                author='test_author',
+                options={'body': {
+                    'hello': 'world'
+                }})
 
         self.assertEqual(len(responses.calls), 1)
-        self.assertEqual(json.loads(responses.calls[0].request.body), expected_payload)
-        decoded = jwt.decode(responses.calls[0].request.headers['Authorization'].split('bearer ')[1], SWITCH_JWT_SECRET, algorithms='HS256')
+        self.assertEqual(json.loads(responses.calls[0].request.body),
+                         expected_payload)
+        decoded = jwt.decode(
+            responses.calls[0].request.headers['Authorization'].split(
+                'bearer ')[1],
+            SWITCH_JWT_SECRET,
+            algorithms='HS256')
+
 
 if __name__ == '__main__':
     unittest.main()
