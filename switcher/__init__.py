@@ -1,5 +1,5 @@
-from . import switcher
+from . import publisher
 
 __all__ = [
-    'switcher'
+    'publisher'
 ]

@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='switcher',
-    version='0.1.3',
+    version='0.1.6',
     description='python SDK for switch service to publish messages on topics',
     long_description_content_type="text/markdown",
     long_description=README + '\n\n',
