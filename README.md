@@ -6,6 +6,7 @@
 
 python version of switch sdk, allows to publish messages on any topic to trigger all configured
 subscribers at switch service.
+<https://github.com/Kareem-Emad/switch>
 
 ## Setup
 
